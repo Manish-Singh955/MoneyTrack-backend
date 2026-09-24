@@ -31,7 +31,7 @@ router.get(
   "/callback/google",
   passport.authenticate("google", {
     session: false,
-    failureRedirect: `${process.env.FRONTEND_URL || "https://money-track-frontend-mf1ouqh1a-manishkusingh35-5269.vercel.app"}/login?error=google`,
+    failureRedirect: `${process.env.FRONTEND_URL || "https://money-track-frontend-orcin.vercel.app"}/login?error=google`,
   }),
   googleCallback
 );

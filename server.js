@@ -31,7 +31,7 @@ const configuredOrigins = (process.env.FRONTEND_URL || "")
 
 const allowedOrigins = [
   ...configuredOrigins,
-  "https://money-track-frontend-mf1ouqh1a-manishkusingh35-5269.vercel.app",
+  "https://money-track-frontend-orcin.vercel.app",
   "http://localhost:5173",
   "http://localhost:5174",
 ];

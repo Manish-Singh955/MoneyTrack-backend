@@ -18,7 +18,7 @@ const googleCallback = (req, res) => {
   const user = req.user;
   const frontendUrl =
     process.env.FRONTEND_URL ||
-    "https://money-track-frontend-mf1ouqh1a-manishkusingh35-5269.vercel.app";
+    "https://money-track-frontend-orcin.vercel.app";
   const userData = {
     id: user._id,
     name: user.name,
