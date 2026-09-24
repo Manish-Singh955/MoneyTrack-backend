@@ -5,6 +5,11 @@ const jwt = require("jsonwebtoken");
 const productionFrontendUrl =
   "https://money-track-frontend-orcin.vercel.app";
 
+const isProduction =
+  process.env.NODE_ENV === "production" ||
+  process.env.RENDER === "true" ||
+  Boolean(process.env.RENDER_EXTERNAL_URL);
+
 // Generate JWT
 const generateToken = (userId) => {
   return jwt.sign(
@@ -19,7 +24,7 @@ const generateToken = (userId) => {
 
 const googleCallback = (req, res) => {
   const user = req.user;
-  const frontendUrl = process.env.RENDER
+  const frontendUrl = isProduction
     ? productionFrontendUrl
     : process.env.FRONTEND_URL || "http://localhost:5173";
   const userData = {

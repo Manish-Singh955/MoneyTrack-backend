@@ -9,7 +9,11 @@ const passport = require("../config/passport");
 
 const productionFrontendUrl =
   "https://money-track-frontend-orcin.vercel.app";
-const googleFailureUrl = process.env.RENDER
+const isProduction =
+  process.env.NODE_ENV === "production" ||
+  process.env.RENDER === "true" ||
+  Boolean(process.env.RENDER_EXTERNAL_URL);
+const googleFailureUrl = isProduction
   ? productionFrontendUrl
   : process.env.FRONTEND_URL || "http://localhost:5173";
 

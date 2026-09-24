@@ -4,7 +4,11 @@ const User = require("../models/User");
 
 const productionCallbackUrl =
   "https://moneytrack-backend-8zl4.onrender.com/api/auth/callback/google";
-const callbackUrl = process.env.RENDER
+const isProduction =
+  process.env.NODE_ENV === "production" ||
+  process.env.RENDER === "true" ||
+  Boolean(process.env.RENDER_EXTERNAL_URL);
+const callbackUrl = isProduction
   ? productionCallbackUrl
   : process.env.GOOGLE_CALLBACK_URL || "http://localhost:5000/api/auth/callback/google";
 
