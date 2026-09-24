@@ -24,14 +24,27 @@ const app = express();
 
 
 // Middleware
+const configuredOrigins = (process.env.FRONTEND_URL || "")
+  .split(",")
+  .map((origin) => origin.trim().replace(/\/$/, ""))
+  .filter(Boolean);
+
 const allowedOrigins = [
-  process.env.FRONTEND_URL || "http://localhost:5173",
+  ...configuredOrigins,
+  "https://money-track-frontend-mf1ouqh1a-manishkusingh35-5269.vercel.app",
+  "http://localhost:5173",
   "http://localhost:5174",
 ];
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Origin is not allowed by CORS"));
+    },
     credentials: true,
   })
 );
