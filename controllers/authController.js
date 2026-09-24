@@ -2,6 +2,9 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const productionFrontendUrl =
+  "https://money-track-frontend-orcin.vercel.app";
+
 // Generate JWT
 const generateToken = (userId) => {
   return jwt.sign(
@@ -16,9 +19,9 @@ const generateToken = (userId) => {
 
 const googleCallback = (req, res) => {
   const user = req.user;
-  const frontendUrl =
-    process.env.FRONTEND_URL ||
-    "https://money-track-frontend-orcin.vercel.app";
+  const frontendUrl = process.env.RENDER
+    ? productionFrontendUrl
+    : process.env.FRONTEND_URL || "http://localhost:5173";
   const userData = {
     id: user._id,
     name: user.name,

@@ -7,6 +7,12 @@ const {
 } = require("../controllers/authController");
 const passport = require("../config/passport");
 
+const productionFrontendUrl =
+  "https://money-track-frontend-orcin.vercel.app";
+const googleFailureUrl = process.env.RENDER
+  ? productionFrontendUrl
+  : process.env.FRONTEND_URL || "http://localhost:5173";
+
 const router = express.Router();
 
 router.post("/register", register);
@@ -31,7 +37,7 @@ router.get(
   "/callback/google",
   passport.authenticate("google", {
     session: false,
-    failureRedirect: `${process.env.FRONTEND_URL || "https://money-track-frontend-orcin.vercel.app"}/login?error=google`,
+    failureRedirect: `${googleFailureUrl}/login?error=google`,
   }),
   googleCallback
 );
