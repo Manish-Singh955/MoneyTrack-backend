@@ -4,8 +4,7 @@ const User = require("../models/User");
 
 const googleCredentialsConfigured =
   process.env.GOOGLE_CLIENT_ID &&
-  process.env.GOOGLE_CLIENT_SECRET &&
-  process.env.GOOGLE_CALLBACK_URL;
+  process.env.GOOGLE_CLIENT_SECRET;
 
 if (googleCredentialsConfigured) {
   passport.use(
@@ -13,7 +12,9 @@ if (googleCredentialsConfigured) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: process.env.GOOGLE_CALLBACK_URL,
+        callbackURL:
+          process.env.GOOGLE_CALLBACK_URL ||
+          "https://moneytrack-backend-8zl4.onrender.com/api/auth/callback/google",
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
